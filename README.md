@@ -16,8 +16,89 @@ STEP-4: Else subtract the key from the plain text.
 STEP-5: Display the cipher text obtained above.
 
 ## PROGRAM:
+Encrpytion program 
+```
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+
+int main()
+{
+    char text[100];
+    int key, i;
+
+    printf("Enter a message: ");
+    fgets(text, sizeof(text), stdin);
+
+    printf("Enter the key: ");
+    scanf("%d", &key);
+
+    key = ((key % 26) + 26) % 26;
+
+    for (i = 0; text[i] != '\0'; i++)
+    {
+        if (isupper((unsigned char)text[i]))
+        {
+            text[i] = (text[i] - 'A' + key) % 26 + 'A';
+        }
+        else if (islower((unsigned char)text[i]))
+        {
+            text[i] = (text[i] - 'a' + key) % 26 + 'a';
+        }
+    }
+
+    printf("Encrypted message: %s", text);
+
+    return 0;
+}
+
+
+```
+Decryption program 
+```
+
+#include <stdio.h>
+#include <ctype.h>
+
+int main()
+{
+    char text[100];
+    int key, i;
+
+    printf("Enter the encrypted message: ");
+    fgets(text, sizeof(text), stdin);
+
+    printf("Enter the key: ");
+    scanf("%d", &key);
+
+    key = ((key % 26) + 26) % 26;
+
+    for (i = 0; text[i] != '\0'; i++)
+    {
+        if (isupper((unsigned char)text[i]))
+        {
+            text[i] = (text[i] - 'A' - key + 26) % 26 + 'A';
+        }
+        else if (islower((unsigned char)text[i]))
+        {
+            text[i] = (text[i] - 'a' - key + 26) % 26 + 'a';
+        }
+    }
+
+    printf("Decrypted message: %s", text);
+
+    return 0;
+}
+
+```
 
 ## OUTPUT:
+<img width="316" height="152" alt="Screenshot 2026-10-27 091600" src="https://github.com/user-attachments/assets/2e327684-afc9-4e34-b90c-3c1ed2dd24dc" />
+<img width="453" height="152" alt="Screenshot 2026-10-27 091729" src="https://github.com/user-attachments/assets/566e45f3-ea5a-4f35-bb19-0c9a5a4333e7" />
+
+
+
+
 
 ## RESULT :
  Thus the implementation of ceasar cipher had been executed successfully.
